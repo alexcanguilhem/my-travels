@@ -1,29 +1,35 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-
-import Travel from "./Travel";
+import Lamp from "./Lamp"
+import Quote from "./Quote";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      working: true 
+    };
+  }
+  changeWorkingState = () => this.setState({working : !this.state.working})
+  handleClick = () => this.setState({ working: !this.state.working });
   render() {
+    const changeLogo = this.state.working ? 'App-logo' : 'App-logo2';
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">My Favorites Destinations</h1>
+          <img src={logo} className={changeLogo} alt="logo" />
+          <h1 className="App-title">Simpsons Quotes</h1>
         </header>
-        <Travel
-          country="USA"
-          destination="New York, The Big Apple"
-          photo="https://www.guidesulysse.com/images/destinations/iStock-619521204.jpg"
-          distance="6142 kms"
+        <button onClick={this.changeWorkingState}>{this.state.working+""}</button>
+        <Lamp on />
+        <Lamp />
+        <Quote
+          quote="I believe the children are the future... Unless we stop them now!"
+          character="Homer Simpson"
+          image="https://cdn.glitch.com/3c3ffadc-3406-4440-bb95-d40ec8fcde72%2FHomerSimpson.png?1497567511939"
         />
-        <Travel
-          country="Mexico"
-          destination="Tulum"
-          photo="https://cdn.getyourguide.com/img/tour_img-438247-148.jpg"
-          distance="8581 kms"
-        />
+
       </div>
     );
   }
